@@ -1,2 +1,46 @@
-# assert-action
-Performs different types of assertions for use in an Action workflow.  This is intended to be used to validate outputs and helpful in writing integration tests of Actions.
+# Assert
+
+Various assertions to aide in validating action outputs
+
+---
+
+## **Inputs**
+
+### **`expected`**
+
+**Required** Expected value
+
+### **`actual`**
+
+**Required** Actual value
+
+### **`comparison`**
+
+**Optional** Type of comparison to perform.  Supports "exact" (default), "startsWith", "endsWith", "contains", "notEqual"
+
+---
+
+## **Outputs**
+
+### **`result`**
+
+Various assertions to aide in validating action outputs
+
+---
+
+## **Examples**
+
+### Example usage w/ exact assertion
+
+```yaml
+- uses: nick-invision@v1
+  with:
+    expected: ${{ secrets.REPO_TOKEN }}
+    actual: ${{ steps.outputs }}
+```
+
+---
+
+## **Limitations**
+
+- If running on self-hosted runner, NodeJS must be installed.

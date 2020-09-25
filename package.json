@@ -1,0 +1,44 @@
+{
+  "name": "assert-action",
+  "version": "1.0.0",
+  "description": "Performs different types of assertions for use in an Action workflow.",
+  "main": "index.js",
+  "scripts": {
+    "generateAction": "action-gen generate",
+    "build": "ncc build ./index.js -o ./dist",
+    "test": "cross-env TEST_RUNNING=true jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nick-invision/assert-action.git"
+  },
+  "author": "Nick Fields",
+  "license": "MIT",
+  "devDependencies": {
+    "@actions/core": "1.2.6",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@semantic-release/changelog": "^3.0.6",
+    "@semantic-release/git": "^7.0.18",
+    "@zeit/ncc": "^0.20.5",
+    "action-gen": "1.1.6",
+    "cross-env": "7.0.2",
+    "decache": "4.6.0",
+    "dotenv": "8.2.0",
+    "husky": "^3.1.0",
+    "jest": "26.4.2",
+    "prettier": "2.1.2",
+    "semantic-release": "^17.0.3"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "npm run generateAction && npm run build && git add ."
+    }
+  },
+  "prettier": {
+    "trailingComma": "all",
+    "singleQuote": true,
+    "semi": true
+  }
+}

@@ -1,0 +1,19 @@
+name: Assert
+description: Various assertions to aide in validating action outputs
+inputs:
+  expected:
+    description: Expected value
+    required: true
+  actual:
+    description: Actual value
+    required: true
+  comparison:
+    description: Type of comparison to perform.  Supports "exact" (default), "startsWith", "endsWith", "contains", "notEqual"
+    required: false
+    default: exact
+outputs:
+  result:
+    description: Various assertions to aide in validating action outputs
+runs:
+  using: node12
+  main: dist/index.js
