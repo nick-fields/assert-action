@@ -1,6 +1,6 @@
 const { buildConfig } = require('action-gen');
 module.exports = buildConfig({
-  name: 'Assert',
+  name: 'Assert Action',
   description: {
     short: 'Various assertions to aide in validating action outputs',
   },
@@ -46,7 +46,7 @@ module.exports = buildConfig({
         title: 'Example usage w/ exact assertion',
         codeLanguage: 'yaml',
         codeBlock: `
-- uses: nick-invision@v1
+- uses: nick-invision@assert-actionv1
   with:
     expected: \${{ secrets.REPO_TOKEN }}
     actual: \${{ steps.outputs }}

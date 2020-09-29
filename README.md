@@ -1,4 +1,4 @@
-# Assert
+# Assert Action
 
 Various assertions to aide in validating action outputs
 
@@ -33,7 +33,7 @@ Various assertions to aide in validating action outputs
 ### Example usage w/ exact assertion
 
 ```yaml
-- uses: nick-invision@v1
+- uses: nick-invision@assert-actionv1
   with:
     expected: ${{ secrets.REPO_TOKEN }}
     actual: ${{ steps.outputs }}
