@@ -27,7 +27,7 @@ jobs:
       - name: Assert endsWith
         uses: ./
         with:
-          expected: test
+          expected: ing
           actual: ${{ steps.test-data.outputs.value }}
           comparison: endsWith
       - name: Assert contains
