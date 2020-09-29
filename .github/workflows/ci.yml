@@ -8,6 +8,7 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       # positive tests to verify assertions work as expected
       - name: Setup Test Data
         id: test-data
