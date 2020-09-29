@@ -53,6 +53,7 @@ jobs:
       - name: Assert startsWith fails
         uses: ./
         id: startswith-fail
+        continue-on-error: true
         with:
           expected: not
           actual: ${{ steps.test-data.outputs.value }}
@@ -60,6 +61,7 @@ jobs:
       - name: Assert endsWith
         id: endswith-fail
         uses: ./
+        continue-on-error: true
         with:
           expected: not
           actual: ${{ steps.test-data.outputs.value }}
@@ -67,6 +69,7 @@ jobs:
       - name: Assert contains
         id: contains-fail
         uses: ./
+        continue-on-error: true
         with:
           expected: not
           actual: ${{ steps.test-data.outputs.value }}
@@ -74,6 +77,7 @@ jobs:
       - name: Assert notEqual
         id: notequal-fail
         uses: ./
+        continue-on-error: true
         with:
           expected: testing
           actual: ${{ steps.test-data.outputs.value }}
