@@ -22,7 +22,8 @@ module.exports = buildConfig({
     {
       id: 'comparison',
       description: {
-        short: 'Result of the comparison.  Can be either `passed` or `failed`',
+        short:
+          'Type of comparison to perform.  Supports "exact" (default), "startsWith", "endsWith", "contains", "notEqual"',
       },
       required: false,
       default: 'exact',
@@ -31,8 +32,7 @@ module.exports = buildConfig({
   outputs: [
     {
       id: 'result',
-      description:
-        'Result of the assertion.  Returns either "passed" or "failed',
+      description: 'Result of the comparison.  Can be either passed or failed',
     },
   ],
   runs: {

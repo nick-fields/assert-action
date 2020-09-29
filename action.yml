@@ -8,12 +8,12 @@ inputs:
     description: Actual value
     required: true
   comparison:
-    description: Result of the comparison.  Can be either `passed` or `failed`
+    description: Type of comparison to perform.  Supports "exact" (default), "startsWith", "endsWith", "contains", "notEqual"
     required: false
     default: exact
 outputs:
   result:
-    description: Various assertions to aide in validating action outputs
+    description: Result of the comparison.  Can be either passed or failed
 runs:
   using: node12
   main: dist/index.js

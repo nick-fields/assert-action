@@ -16,7 +16,7 @@ Various assertions to aide in validating action outputs
 
 ### **`comparison`**
 
-**Optional** Result of the comparison.  Can be either `passed` or `failed`
+**Optional** Type of comparison to perform. Supports "exact" (default), "startsWith", "endsWith", "contains", "notEqual"
 
 ---
 
@@ -24,7 +24,7 @@ Various assertions to aide in validating action outputs
 
 ### **`result`**
 
-Various assertions to aide in validating action outputs
+Result of the comparison. Can be either passed or failed
 
 ---
 
