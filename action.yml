@@ -1,4 +1,4 @@
-name: Assert
+name: Assertion
 description: Various assertions to aide in validating action outputs
 inputs:
   expected:
