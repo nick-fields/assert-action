@@ -17,30 +17,30 @@ jobs:
         uses: ./
         with:
           expected: testing
-          actual: ${{ steps.outputs.test-data.value }}
+          actual: ${{ steps.test-data.outputs.value }}
       - name: Assert startsWith
         uses: ./
         with:
           expected: test
-          actual: ${{ steps.outputs.test-data.value }}
+          actual: ${{ steps.test-data.outputs.value }}
           comparison: startsWith
       - name: Assert endsWith
         uses: ./
         with:
           expected: test
-          actual: ${{ steps.outputs.test-data.value }}
+          actual: ${{ steps.test-data.outputs.value }}
           comparison: endsWith
       - name: Assert contains
         uses: ./
         with:
           expected: est
-          actual: ${{ steps.outputs.test-data.value }}
+          actual: ${{ steps.test-data.outputs.value }}
           comparison: contains
       - name: Assert notEqual
         uses: ./
         with:
           expected: 123
-          actual: ${{ steps.outputs.test-data.value }}
+          actual: ${{ steps.test-data.outputs.value }}
           comparison: notEqual
       # negative tests to verify when assertion fails error is thrown
       - name: Assert expected (fails)
@@ -49,34 +49,34 @@ jobs:
         continue-on-error: true
         with:
           expected: not-testing
-          actual: ${{ steps.outputs.test-data.value }}
+          actual: ${{ steps.test-data.outputs.value }}
       - name: Assert startsWith fails
         uses: ./
         id: startswith-fail
         with:
           expected: not
-          actual: ${{ steps.outputs.test-data.value }}
+          actual: ${{ steps.test-data.outputs.value }}
           comparison: startsWith
       - name: Assert endsWith
         id: endswith-fail
         uses: ./
         with:
           expected: not
-          actual: ${{ steps.outputs.test-data.value }}
+          actual: ${{ steps.test-data.outputs.value }}
           comparison: endsWith
       - name: Assert contains
         id: contains-fail
         uses: ./
         with:
           expected: not
-          actual: ${{ steps.outputs.test-data.value }}
+          actual: ${{ steps.test-data.outputs.value }}
           comparison: contains
       - name: Assert notEqual
         id: notequal-fail
         uses: ./
         with:
           expected: testing
-          actual: ${{ steps.outputs.test-data.value }}
+          actual: ${{ steps.test-data.outputs.value }}
           comparison: notEqual
       # verify all expected failures threw error
       - name: Verify expected statuses from previous tests
