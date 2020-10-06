@@ -23,7 +23,7 @@ module.exports = buildConfig({
       id: 'comparison',
       description: {
         short:
-          'Type of comparison to perform.  Supports "exact" (default), "startsWith", "endsWith", "contains", "notEqual"',
+          'Type of comparison to perform.  Supports `exact` (default), `startsWith`, `endsWith`, `contains`, `notEqual`, `notStartsWith`, `notEndsWith`, `notContains`',
       },
       required: false,
       default: 'exact',
@@ -80,6 +80,19 @@ module.exports = buildConfig({
 `.trim(),
       },
       {
+        title: 'Example usage w/ notStartsWith assertion',
+        codeLanguage: 'yaml',
+        codeBlock: `
+- id: test-data
+  run: echo "::set-output name=value::testing"
+- uses: nick-invision@assert-action@v1
+  with:
+    expected: abc
+    actual: \${{ steps.test-data.outputs.value }}
+    comparison: notStartsWith
+`.trim(),
+      },
+      {
         title: 'Example usage w/ endsWith assertion',
         codeLanguage: 'yaml',
         codeBlock: `
@@ -93,6 +106,19 @@ module.exports = buildConfig({
 `.trim(),
       },
       {
+        title: 'Example usage w/ notEndsWith assertion',
+        codeLanguage: 'yaml',
+        codeBlock: `
+- id: test-data
+  run: echo "::set-output name=value::testing"
+- uses: nick-invision@assert-action@v1
+  with:
+    expected: abc
+    actual: \${{ steps.test-data.outputs.value }}
+    comparison: notEndsWith
+`.trim(),
+      },
+      {
         title: 'Example usage w/ contains assertion',
         codeLanguage: 'yaml',
         codeBlock: `
@@ -103,6 +129,19 @@ module.exports = buildConfig({
     expected: est
     actual: \${{ steps.test-data.outputs.value }}
     comparison: endsWith
+`.trim(),
+      },
+      {
+        title: 'Example usage w/ notContains assertion',
+        codeLanguage: 'yaml',
+        codeBlock: `
+- id: test-data
+  run: echo "::set-output name=value::testing"
+- uses: nick-invision@assert-action@v1
+  with:
+    expected: est
+    actual: \${{ steps.test-data.outputs.value }}
+    comparison: notEndsWith
 `.trim(),
       },
       {

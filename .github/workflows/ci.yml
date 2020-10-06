@@ -42,6 +42,24 @@ jobs:
           expected: 123
           actual: ${{ steps.test-data.outputs.value }}
           comparison: notEqual
+      - name: Assert notStartsWith
+        uses: ./
+        with:
+          expected: est
+          actual: ${{ steps.test-data.outputs.value }}
+          comparison: notStartsWith
+      - name: Assert notEndsWith
+        uses: ./
+        with:
+          expected: test
+          actual: ${{ steps.test-data.outputs.value }}
+          comparison: notEndsWith
+      - name: Assert notContains
+        uses: ./
+        with:
+          expected: 123
+          actual: ${{ steps.test-data.outputs.value }}
+          comparison: notContains
       # negative tests to verify when assertion fails error is thrown
       - name: Assert expected (fails)
         uses: ./
@@ -82,11 +100,35 @@ jobs:
           expected: testing
           actual: ${{ steps.test-data.outputs.value }}
           comparison: notEqual
+      - name: Assert notContains
+        id: notcontains-fail
+        uses: ./
+        continue-on-error: true
+        with:
+          expected: est
+          actual: ${{ steps.test-data.outputs.value }}
+          comparison: notContains
+      - name: Assert notStartsWith
+        id: notstartswith-fail
+        uses: ./
+        continue-on-error: true
+        with:
+          expected: tes
+          actual: ${{ steps.test-data.outputs.value }}
+          comparison: notStartsWith
+      - name: Assert notEndsWith
+        id: notendswith-fail
+        uses: ./
+        continue-on-error: true
+        with:
+          expected: ing
+          actual: ${{ steps.test-data.outputs.value }}
+          comparison: notEndsWith
       # verify all expected failures threw error
       - name: Verify expected statuses from previous tests
         uses: ./
         with:
-          expected: ${{ steps.expected-fail.outcome == 'failure' && steps.startswith-fail.outcome == 'failure' && steps.endswith-fail.outcome == 'failure' && steps.contains-fail.outcome == 'failure' && steps.notequal-fail.outcome == 'failure' }}
+          expected: ${{ steps.expected-fail.outcome == 'failure' && steps.startswith-fail.outcome == 'failure' && steps.endswith-fail.outcome == 'failure' && steps.contains-fail.outcome == 'failure' && steps.notequal-fail.outcome == 'failure' && steps.notcontains-fail.outcome == 'failure' && steps.notstartswith-fail.outcome == 'failure' && steps.notendswith-fail.outcome == 'failure' }}
           actual: true
 
   # runs on push to master only

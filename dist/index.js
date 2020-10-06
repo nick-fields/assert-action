@@ -120,10 +120,14 @@ const { getInput, setFailed, setOutput } = __webpack_require__(470);
 const DEFAULT_COMPARISON = 'exact';
 const SUPPORTED_COMPARISONS = [
   DEFAULT_COMPARISON,
+  'notexact',
+  'notequal',
   'startsWith',
+  'notstartsWith',
   'endsWith',
+  'notendsWith',
   'contains',
-  'notEqual',
+  'notcontains',
 ];
 
 function throwAssertError(expected, actual, comparison) {
@@ -151,8 +155,15 @@ async function runAction() {
 
   switch (comparison.toLowerCase()) {
     case 'exact':
+    case 'equal':
       if (actual !== expected) {
         throwAssertError(expected, actual, 'equal');
+      }
+      break;
+    case 'notequal':
+    case 'notexact':
+      if (actual === expected) {
+        throwAssertError(expected, actual, 'not equal');
       }
       break;
     case 'startswith':
@@ -160,9 +171,19 @@ async function runAction() {
         throwAssertError(expected, actual, 'start with');
       }
       break;
+    case 'notstartswith':
+      if (actual.startsWith(expected)) {
+        throwAssertError(expected, actual, 'not start with');
+      }
+      break;
     case 'endswith':
       if (!actual.endsWith(expected)) {
         throwAssertError(expected, actual, 'end with');
+      }
+      break;
+    case 'notendswith':
+      if (actual.endsWith(expected)) {
+        throwAssertError(expected, actual, 'not end with');
       }
       break;
     case 'contains':
@@ -170,9 +191,9 @@ async function runAction() {
         throwAssertError(expected, actual, 'contain');
       }
       break;
-    case 'notequal':
-      if (actual === expected) {
-        throwAssertError(expected, actual, 'not equal');
+    case 'notcontains':
+      if (actual.includes(expected)) {
+        throwAssertError(expected, actual, 'not contain');
       }
       break;
     default:

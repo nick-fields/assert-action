@@ -16,7 +16,7 @@ Various assertions to aide in validating action outputs
 
 ### **`comparison`**
 
-**Optional** Type of comparison to perform. Supports "exact" (default), "startsWith", "endsWith", "contains", "notEqual"
+**Optional** Type of comparison to perform. Supports `exact` (default), `startsWith`, `endsWith`, `contains`, `notEqual`, `notStartsWith`, `notEndsWith`, `notContains`
 
 ---
 
@@ -65,6 +65,18 @@ Result of the comparison. Can be either passed or failed
     comparison: startsWith
 ```
 
+### Example usage w/ notStartsWith assertion
+
+```yaml
+- id: test-data
+  run: echo "::set-output name=value::testing"
+- uses: nick-invision@assert-action@v1
+  with:
+    expected: abc
+    actual: ${{ steps.test-data.outputs.value }}
+    comparison: notStartsWith
+```
+
 ### Example usage w/ endsWith assertion
 
 ```yaml
@@ -77,6 +89,18 @@ Result of the comparison. Can be either passed or failed
     comparison: endsWith
 ```
 
+### Example usage w/ notEndsWith assertion
+
+```yaml
+- id: test-data
+  run: echo "::set-output name=value::testing"
+- uses: nick-invision@assert-action@v1
+  with:
+    expected: abc
+    actual: ${{ steps.test-data.outputs.value }}
+    comparison: notEndsWith
+```
+
 ### Example usage w/ contains assertion
 
 ```yaml
@@ -87,6 +111,18 @@ Result of the comparison. Can be either passed or failed
     expected: est
     actual: ${{ steps.test-data.outputs.value }}
     comparison: endsWith
+```
+
+### Example usage w/ notContains assertion
+
+```yaml
+- id: test-data
+  run: echo "::set-output name=value::testing"
+- uses: nick-invision@assert-action@v1
+  with:
+    expected: est
+    actual: ${{ steps.test-data.outputs.value }}
+    comparison: notEndsWith
 ```
 
 ### Example usage w/ notEqual assertion

@@ -33,7 +33,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "npm run generateAction && npm run build && git add ."
+      "pre-commit": "npm run build && git add ."
     }
   },
   "prettier": {
