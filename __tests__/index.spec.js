@@ -264,4 +264,121 @@ describe('runAction', () => {
       });
     }
   });
+
+  describe('notstartswith', () => {
+    const comparison = 'notStartsWith';
+    const actual = 'testing';
+
+    beforeEach(() => {
+      mockComparison(comparison);
+      mockActual(actual);
+    });
+
+    const passTests = ['est', 'ing', 'TESTING'];
+
+    const failTests = ['t', 'tes', 'testing'];
+
+    for (const test of passTests) {
+      it(`success when ${actual} ${comparison} ${test}`, async () => {
+        mockExpected(test);
+        await runAction();
+
+        expect(actions.setOutput).toHaveBeenCalledWith('result', 'passed');
+      });
+    }
+
+    for (const test of failTests) {
+      it(`fails when ${actual} does not ${comparison} ${test}`, async () => {
+        let thrownErr;
+        mockExpected(test);
+
+        try {
+          await runAction();
+        } catch (error) {
+          thrownErr = error.message;
+        }
+
+        expect(actions.setOutput).toHaveBeenCalledWith('result', 'failed');
+        expect(thrownErr).toContain('Expected', 'not equal');
+      });
+    }
+  });
+
+  describe('notendswith', () => {
+    const comparison = 'notEndsWith';
+    const actual = 'testing';
+
+    beforeEach(() => {
+      mockComparison(comparison);
+      mockActual(actual);
+    });
+
+    const failTests = ['ing', 'testing'];
+
+    const passTests = ['t', 'tes', 'TESTING'];
+
+    for (const test of passTests) {
+      it(`success when ${actual} ${comparison} ${test}`, async () => {
+        mockExpected(test);
+        await runAction();
+
+        expect(actions.setOutput).toHaveBeenCalledWith('result', 'passed');
+      });
+    }
+
+    for (const test of failTests) {
+      it(`fails when ${actual} does not ${comparison} ${test}`, async () => {
+        let thrownErr;
+        mockExpected(test);
+
+        try {
+          await runAction();
+        } catch (error) {
+          thrownErr = error.message;
+        }
+
+        expect(actions.setOutput).toHaveBeenCalledWith('result', 'failed');
+        expect(thrownErr).toContain('Expected', 'not equal');
+      });
+    }
+  });
+
+  describe('notcontains', () => {
+    const comparison = 'notContains';
+    const actual = 'testing';
+
+    beforeEach(() => {
+      mockComparison(comparison);
+      mockActual(actual);
+    });
+
+    const failTests = ['testing', 'tes', 'ing', 'est'];
+
+    const passTests = ['TESTING', 'abc', '123'];
+
+    for (const test of passTests) {
+      it(`success when ${actual} ${comparison} ${test}`, async () => {
+        mockExpected(test);
+        await runAction();
+
+        expect(actions.setOutput).toHaveBeenCalledWith('result', 'passed');
+      });
+    }
+
+    for (const test of failTests) {
+      it(`fails when ${actual} does not ${comparison} ${test}`, async () => {
+        let thrownErr;
+        mockExpected(test);
+
+        try {
+          await runAction();
+        } catch (error) {
+          thrownErr = error.message;
+        }
+
+        expect(actions.setOutput).toHaveBeenCalledWith('result', 'failed');
+        expect(thrownErr).toContain('Expected', 'not equal');
+      });
+    }
+  });
 });
