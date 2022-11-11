@@ -131,11 +131,11 @@ jobs:
           expected: ${{ steps.expected-fail.outcome == 'failure' && steps.startswith-fail.outcome == 'failure' && steps.endswith-fail.outcome == 'failure' && steps.contains-fail.outcome == 'failure' && steps.notequal-fail.outcome == 'failure' && steps.notcontains-fail.outcome == 'failure' && steps.notstartswith-fail.outcome == 'failure' && steps.notendswith-fail.outcome == 'failure' }}
           actual: true
 
-  # runs on push to master only
+  # runs on push to main only
   cd:
     name: Publish Action
     needs: tests
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
