@@ -112,7 +112,7 @@ Result of the comparison. Can be either passed or failed
   with:
     expected: est
     actual: ${{ steps.test-data.outputs.value }}
-    comparison: endsWith
+    comparison: contains
 ```
 
 ### Example usage w/ notContains assertion
@@ -122,9 +122,9 @@ Result of the comparison. Can be either passed or failed
   run: echo "::set-output name=value::testing"
 - uses: nick-fields/assert-action@v1
   with:
-    expected: est
+    expected: abc
     actual: ${{ steps.test-data.outputs.value }}
-    comparison: notEndsWith
+    comparison: notContains
 ```
 
 ### Example usage w/ notEqual assertion
