@@ -18,8 +18,8 @@
     "@actions/core": "^1.10.0",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
-    "@semantic-release/changelog": "^3.0.6",
-    "@semantic-release/git": "^7.0.18",
+    "@semantic-release/changelog": "latest",
+    "@semantic-release/git": "^10.0.1",
     "@zeit/ncc": "^0.20.5",
     "action-gen": "1.1.6",
     "cross-env": "7.0.2",
@@ -28,7 +28,7 @@
     "husky": "^3.1.0",
     "jest": "26.4.2",
     "prettier": "2.1.2",
-    "semantic-release": "^17.0.3"
+    "semantic-release": "^19.0.5"
   },
   "husky": {
     "hooks": {
