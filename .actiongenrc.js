@@ -36,7 +36,7 @@ module.exports = buildConfig({
     },
   ],
   runs: {
-    using: 'node16',
+    using: 'node20',
     main: 'dist/index.js',
   },
   usage: {
