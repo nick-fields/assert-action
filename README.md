@@ -37,7 +37,7 @@ Result of the comparison. Can be either passed or failed
 ```yaml
 - id: test-data
   run: echo "::set-output name=value::testing"
-- uses: nick-fields/assert-action@v1
+- uses: nick-fields/assert-action@v2
   with:
     expected: testing
     actual: ${{ steps.test-data.outputs.value }}
@@ -48,7 +48,7 @@ Result of the comparison. Can be either passed or failed
 ```yaml
 - id: test-data
   run: echo "::set-output name=value::testing"
-- uses: nick-fields/assert-action@v1
+- uses: nick-fields/assert-action@v2
   with:
     expected: testing
     actual: ${{ steps.test-data.outputs.value }}
@@ -60,7 +60,7 @@ Result of the comparison. Can be either passed or failed
 ```yaml
 - id: test-data
   run: echo "::set-output name=value::testing"
-- uses: nick-fields/assert-action@v1
+- uses: nick-fields/assert-action@v2
   with:
     expected: test
     actual: ${{ steps.test-data.outputs.value }}
@@ -72,7 +72,7 @@ Result of the comparison. Can be either passed or failed
 ```yaml
 - id: test-data
   run: echo "::set-output name=value::testing"
-- uses: nick-fields/assert-action@v1
+- uses: nick-fields/assert-action@v2
   with:
     expected: abc
     actual: ${{ steps.test-data.outputs.value }}
@@ -84,7 +84,7 @@ Result of the comparison. Can be either passed or failed
 ```yaml
 - id: test-data
   run: echo "::set-output name=value::testing"
-- uses: nick-fields/assert-action@v1
+- uses: nick-fields/assert-action@v2
   with:
     expected: ing
     actual: ${{ steps.test-data.outputs.value }}
@@ -96,7 +96,7 @@ Result of the comparison. Can be either passed or failed
 ```yaml
 - id: test-data
   run: echo "::set-output name=value::testing"
-- uses: nick-fields/assert-action@v1
+- uses: nick-fields/assert-action@v2
   with:
     expected: abc
     actual: ${{ steps.test-data.outputs.value }}
@@ -108,7 +108,7 @@ Result of the comparison. Can be either passed or failed
 ```yaml
 - id: test-data
   run: echo "::set-output name=value::testing"
-- uses: nick-fields/assert-action@v1
+- uses: nick-fields/assert-action@v2
   with:
     expected: est
     actual: ${{ steps.test-data.outputs.value }}
@@ -120,7 +120,7 @@ Result of the comparison. Can be either passed or failed
 ```yaml
 - id: test-data
   run: echo "::set-output name=value::testing"
-- uses: nick-fields/assert-action@v1
+- uses: nick-fields/assert-action@v2
   with:
     expected: abc
     actual: ${{ steps.test-data.outputs.value }}
@@ -132,7 +132,7 @@ Result of the comparison. Can be either passed or failed
 ```yaml
 - id: test-data
   run: echo "::set-output name=value::testing"
-- uses: nick-fields/assert-action@v1
+- uses: nick-fields/assert-action@v2
   with:
     expected: abc
     actual: ${{ steps.test-data.outputs.value }}
