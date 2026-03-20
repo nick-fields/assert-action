@@ -15,5 +15,5 @@ outputs:
   result:
     description: Result of the comparison.  Can be either passed or failed
 runs:
-  using: node20
+  using: node24
   main: dist/index.js
