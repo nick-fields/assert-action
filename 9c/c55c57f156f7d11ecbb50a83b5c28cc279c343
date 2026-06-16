@@ -1,0 +1,19 @@
+.github/workflows/ci.yml
+  s_64749c022c5878::t_e5792cecbbd9ca 15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.7",
+  "base_commit_sha": "9cc55c57f156f7d11ecbb50a83b5c28cc279c343",
+  "prompts": {},
+  "sessions": {
+    "s_64749c022c5878": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "82a79b41-24b7-4ab2-90ca-276bf7c91661",
+        "model": "gpt-5-mini"
+      },
+      "human_author": "Nick Fields <46869826+nick-fields@users.noreply.github.com>"
+    }
+  }
+}
