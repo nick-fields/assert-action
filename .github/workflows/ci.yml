@@ -12,7 +12,7 @@ jobs:
       # positive tests to verify assertions work as expected
       - name: Setup Test Data
         id: test-data
-        run: echo "::set-output name=value::testing"
+        run: echo "value=testing" >> $GITHUB_OUTPUT
       - name: Assert expected
         uses: ./
         with:

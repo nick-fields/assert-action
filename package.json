@@ -4,7 +4,6 @@
   "description": "Performs different types of assertions for use in an Action workflow.",
   "main": "index.js",
   "scripts": {
-    "generateAction": "action-gen generate",
     "build": "ncc build ./index.js -o ./dist",
     "test": "cross-env TEST_RUNNING=true jest"
   },
@@ -15,13 +14,12 @@
   "author": "Nick Fields",
   "license": "MIT",
   "devDependencies": {
-    "@actions/core": "^1.10.0",
+    "@actions/core": "^1.11.0",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
     "@semantic-release/changelog": "^6.0.2",
     "@semantic-release/git": "^10.0.1",
     "@vercel/ncc": "^0.38.4",
-    "action-gen": "1.1.6",
     "cross-env": "7.0.2",
     "decache": "4.6.0",
     "dotenv": "8.2.0",
