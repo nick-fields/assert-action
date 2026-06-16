@@ -15,7 +15,7 @@ const SUPPORTED_COMPARISONS = [
 ];
 
 function throwAssertError(expected, actual, comparison) {
-  const msg = `Expected '${actual}' to ${comparison} '${expected}'`;
+  const msg = `Expected '${expected}' to ${comparison} '${actual}'`;
   writeOutput('result', 'failed');
   throw new Error(msg);
 }
