@@ -1,4 +1,5 @@
-const { getInput, setFailed, setOutput } = require('@actions/core');
+const { getInput, setFailed } = require('@actions/core');
+const fs = require('fs');
 
 const DEFAULT_COMPARISON = 'exact';
 const SUPPORTED_COMPARISONS = [
@@ -15,8 +16,19 @@ const SUPPORTED_COMPARISONS = [
 
 function throwAssertError(expected, actual, comparison) {
   const msg = `Expected '${actual}' to ${comparison} '${expected}'`;
-  setOutput('result', 'failed');
+  writeOutput('result', 'failed');
   throw new Error(msg);
+}
+
+function writeOutput(name, value) {
+  const outputPath = process.env.GITHUB_OUTPUT;
+  const line = `${name}=${value}\n`;
+  if (outputPath) {
+    fs.appendFileSync(outputPath, line);
+  } else {
+    // If not running in Actions, warn (tests set GITHUB_OUTPUT)
+    console.warn('GITHUB_OUTPUT not set, skipping output', line.trim());
+  }
 }
 
 async function runAction() {
@@ -85,13 +97,14 @@ async function runAction() {
       );
   }
 
-  setOutput('result', 'passed');
+  writeOutput('result', 'passed');
 }
 
 // this is dumb but makes it easier to test
 if (!process.env.TEST_RUNNING) {
   runAction().catch((err) => {
-    setFailed(err.message), setOutput('result', 'failed');
+    setFailed(err.message);
+    writeOutput('result', 'failed');
     process.exit(1);
   });
 }

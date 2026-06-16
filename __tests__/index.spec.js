@@ -1,7 +1,17 @@
+jest.mock('@actions/core', () => ({
+  getInput: (name) => process.env[`INPUT_${name.toUpperCase()}`],
+  setFailed: jest.fn(),
+}));
 const actions = require('@actions/core');
+const fs = require('fs');
+const path = require('path');
 
-actions.setOutput = jest.fn();
-actions.setFailed = jest.fn();
+const OUTPUT_PATH = path.join(__dirname, 'GITHUB_OUTPUT');
+const clearOutput = () => {
+  try {
+    fs.unlinkSync(OUTPUT_PATH);
+  } catch (e) { }
+};
 
 const { runAction } = require('../index');
 
@@ -25,6 +35,8 @@ describe('runAction', () => {
     mockExpected(DEFAULT_EXPECTED);
     mockActual(DEFAULT_ACTUAL);
     mockComparison(DEFAULT_COMPARISON);
+    process.env.GITHUB_OUTPUT = OUTPUT_PATH;
+    clearOutput();
   });
 
   describe('exact', () => {
@@ -39,13 +51,15 @@ describe('runAction', () => {
       delete process.env[COMPARISON_INPUT_NAME];
       await runAction();
 
-      expect(actions.setOutput).toHaveBeenCalledWith('result', 'passed');
+      const out = fs.readFileSync(process.env.GITHUB_OUTPUT, 'utf8');
+      expect(out).toContain('result=passed');
     });
 
     it('success when exact', async () => {
       await runAction();
 
-      expect(actions.setOutput).toHaveBeenCalledWith('result', 'passed');
+      const out = fs.readFileSync(process.env.GITHUB_OUTPUT, 'utf8');
+      expect(out).toContain('result=passed');
     });
 
     for (const test of failTests) {
@@ -60,7 +74,8 @@ describe('runAction', () => {
           thrownErr = error.message;
         }
 
-        expect(actions.setOutput).toHaveBeenCalledWith('result', 'failed');
+        const out = fs.readFileSync(process.env.GITHUB_OUTPUT, 'utf8');
+        expect(out).toContain('result=failed');
         expect(thrownErr).toContain('Expected', 'to equal');
       });
       it(`fails when ${test} does not match actual ${DEFAULT_ACTUAL}`, async () => {
@@ -73,7 +88,8 @@ describe('runAction', () => {
           thrownErr = error.message;
         }
 
-        expect(actions.setOutput).toHaveBeenCalledWith('result', 'failed');
+        const out = fs.readFileSync(process.env.GITHUB_OUTPUT, 'utf8');
+        expect(out).toContain('result=failed');
         expect(thrownErr).toContain('Expected', 'to equal');
       });
     }
@@ -96,7 +112,8 @@ describe('runAction', () => {
       mockExpected(DEFAULT_EXPECTED.substring(0, 4));
       await runAction();
 
-      expect(actions.setOutput).toHaveBeenCalledWith('result', 'passed');
+      const out = fs.readFileSync(process.env.GITHUB_OUTPUT, 'utf8');
+      expect(out).toContain('result=passed');
     });
 
     for (const test of failTests) {
@@ -110,7 +127,8 @@ describe('runAction', () => {
           thrownErr = error.message;
         }
 
-        expect(actions.setOutput).toHaveBeenCalledWith('result', 'failed');
+        const out = fs.readFileSync(process.env.GITHUB_OUTPUT, 'utf8');
+        expect(out).toContain('result=failed');
         expect(thrownErr).toContain('Expected', 'to start with');
       });
     }
@@ -137,7 +155,8 @@ describe('runAction', () => {
     it(`success when ${actual} ${comparison} ${expected}`, async () => {
       await runAction();
 
-      expect(actions.setOutput).toHaveBeenCalledWith('result', 'passed');
+      const out = fs.readFileSync(process.env.GITHUB_OUTPUT, 'utf8');
+      expect(out).toContain('result=passed');
     });
 
     for (const test of failTests) {
@@ -151,7 +170,8 @@ describe('runAction', () => {
           thrownErr = error.message;
         }
 
-        expect(actions.setOutput).toHaveBeenCalledWith('result', 'failed');
+        const out = fs.readFileSync(process.env.GITHUB_OUTPUT, 'utf8');
+        expect(out).toContain('result=failed');
         expect(thrownErr).toContain('Expected', 'to end with');
       });
     }
@@ -193,7 +213,8 @@ describe('runAction', () => {
         mockExpected(test);
         await runAction();
 
-        expect(actions.setOutput).toHaveBeenCalledWith('result', 'passed');
+        const out = fs.readFileSync(process.env.GITHUB_OUTPUT, 'utf8');
+        expect(out).toContain('result=passed');
       });
     }
 
@@ -208,7 +229,8 @@ describe('runAction', () => {
           thrownErr = error.message;
         }
 
-        expect(actions.setOutput).toHaveBeenCalledWith('result', 'failed');
+        const out = fs.readFileSync(process.env.GITHUB_OUTPUT, 'utf8');
+        expect(out).toContain('result=failed');
         expect(thrownErr).toContain('Expected', 'to end with');
       });
     }
@@ -244,7 +266,8 @@ describe('runAction', () => {
         mockExpected(test);
         await runAction();
 
-        expect(actions.setOutput).toHaveBeenCalledWith('result', 'passed');
+        const out = fs.readFileSync(process.env.GITHUB_OUTPUT, 'utf8');
+        expect(out).toContain('result=passed');
       });
     }
 
@@ -259,7 +282,8 @@ describe('runAction', () => {
           thrownErr = error.message;
         }
 
-        expect(actions.setOutput).toHaveBeenCalledWith('result', 'failed');
+        const out = fs.readFileSync(process.env.GITHUB_OUTPUT, 'utf8');
+        expect(out).toContain('result=failed');
         expect(thrownErr).toContain('Expected', 'not equal');
       });
     }
@@ -283,7 +307,8 @@ describe('runAction', () => {
         mockExpected(test);
         await runAction();
 
-        expect(actions.setOutput).toHaveBeenCalledWith('result', 'passed');
+        const out = fs.readFileSync(process.env.GITHUB_OUTPUT, 'utf8');
+        expect(out).toContain('result=passed');
       });
     }
 
@@ -298,7 +323,8 @@ describe('runAction', () => {
           thrownErr = error.message;
         }
 
-        expect(actions.setOutput).toHaveBeenCalledWith('result', 'failed');
+        const out = fs.readFileSync(process.env.GITHUB_OUTPUT, 'utf8');
+        expect(out).toContain('result=failed');
         expect(thrownErr).toContain('Expected', 'not equal');
       });
     }
@@ -322,7 +348,8 @@ describe('runAction', () => {
         mockExpected(test);
         await runAction();
 
-        expect(actions.setOutput).toHaveBeenCalledWith('result', 'passed');
+        const out = fs.readFileSync(process.env.GITHUB_OUTPUT, 'utf8');
+        expect(out).toContain('result=passed');
       });
     }
 
@@ -337,7 +364,8 @@ describe('runAction', () => {
           thrownErr = error.message;
         }
 
-        expect(actions.setOutput).toHaveBeenCalledWith('result', 'failed');
+        const out = fs.readFileSync(process.env.GITHUB_OUTPUT, 'utf8');
+        expect(out).toContain('result=failed');
         expect(thrownErr).toContain('Expected', 'not equal');
       });
     }
@@ -361,7 +389,8 @@ describe('runAction', () => {
         mockExpected(test);
         await runAction();
 
-        expect(actions.setOutput).toHaveBeenCalledWith('result', 'passed');
+        const out = fs.readFileSync(process.env.GITHUB_OUTPUT, 'utf8');
+        expect(out).toContain('result=passed');
       });
     }
 
@@ -376,7 +405,8 @@ describe('runAction', () => {
           thrownErr = error.message;
         }
 
-        expect(actions.setOutput).toHaveBeenCalledWith('result', 'failed');
+        const out = fs.readFileSync(process.env.GITHUB_OUTPUT, 'utf8');
+        expect(out).toContain('result=failed');
         expect(thrownErr).toContain('Expected', 'not equal');
       });
     }
