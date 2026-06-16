@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nick-invision/assert-action.git"
+    "url": "git+https://github.com/nick-fields/assert-action.git"
   },
   "author": "Nick Fields",
   "license": "MIT",
